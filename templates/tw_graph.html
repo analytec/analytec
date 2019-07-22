@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Twitter Graph | Analytec</title>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js'></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script type="text/javascript" src="{{url_for('static', filename='js/drift.js')}}"></script>
+  <style>
+    html {
+        background-image: url(/static/tw_background.jpg);
+        background-size: cover;
+    }
+    h1 {
+      font: 50px arial, sans-serif;
+    };
+    </style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	var elems = document.querySelectorAll('.carousel');
+	var instances = M.Carousel.init(elems, options);
+});
+</script>
+</head>
+<body>
+  <center>
+
+
+    <h2>Drugs, Weapons, and Alcohol Content in Last {{tweets_num}} Tweets from "{{name}}"</h2>
+    <canvas id="chart" width="320" height="300"></canvas>
+    <script>
+      // bar chart data
+      var barData = {
+        labels : [
+          {% for val in x_vals %}
+            "{{ val }}",
+          {% endfor %}
+        ],
+        datasets : [{
+          fillColor: "rgba(140,224,255,0.2)",
+          strokeColor: "rgba(140,224,255,1)",
+          pointColor: "rgba(140,224,255,1)",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(151,187,205,1)",
+          bezierCurve : true,
+          data : [
+	    {% for drug_val in drug_vals %}
+              {{ drug_val }},
+            {% endfor %}]
+          }
+        ]
+      }
+      var mychart = document.getElementById("chart").getContext("2d");
+      steps = 0.001
+      max = 1
+      // draw bar chart
+      var LineChartDemo = new Chart(mychart).Line(barData, {
+        scaleOverride: true,
+        scaleSteps: steps,
+        scaleStepWidth: Math.ceil(max / steps),
+        scaleStartValue: 0,
+        scaleShowVerticalLines: true,
+        scaleShowGridLines : true,
+        barShowStroke : true,
+        scaleShowLabels: true,
+        bezierCurve: false,
+      });
+    </script>
+
+<canvas id="chart2" width="320" height="300"></canvas>
+<script>
+
+
+  var barData = {
+    labels : [
+      {% for val in x_vals %}
+        "{{ val }}",
+      {% endfor %}
+    ],
+    datasets : [{
+      fillColor: "rgba(140,224,255,0.2)",
+      strokeColor: "rgba(140,224,255,1)",
+      pointColor: "rgba(140,224,255,1)",
+      pointStrokeColor: "#fff",
+      pointHighlightFill: "#fff",
+      pointHighlightStroke: "rgba(151,187,205,1)",
+      bezierCurve : true,
+      data : [
+  {% for weapon_val in weapon_vals %}
+          {{ weapon_val }},
+        {% endfor %}]
+      }
+    ]
+  }
+  var mychart = document.getElementById("chart2").getContext("2d");
+  steps = 0.001
+  max = 1
+
+
+  var LineChartDemo = new Chart(mychart).Line(barData, {
+    scaleOverride: true,
+    scaleSteps: steps,
+    scaleStepWidth: Math.ceil(max / steps),
+    scaleStartValue: 0,
+    scaleShowVerticalLines: true,
+    scaleShowGridLines : true,
+    barShowStroke : true,
+    scaleShowLabels: true,
+    bezierCurve: false,
+  });
+</script>
+
+<canvas id="chart3" width="320" height="300"></canvas>
+<script>
+
+
+  var barData = {
+    labels : [
+      {% for val in x_vals %}
+        "{{ val }}",
+      {% endfor %}
+    ],
+    datasets : [{
+      fillColor: "rgba(140,224,255,0.2)",
+      strokeColor: "rgba(140,224,255,1)",
+      pointColor: "rgba(140,224,255,1)",
+      pointStrokeColor: "#fff",
+      pointHighlightFill: "#fff",
+      pointHighlightStroke: "rgba(151,187,205,1)",
+      bezierCurve : true,
+      data : [
+  {% for alcohol_val in alcohol_vals %}
+          {{ alcohol_val }},
+        {% endfor %}]
+      }
+    ]
+  }
+  var mychart = document.getElementById("chart3").getContext("2d");
+  steps = 0.001
+  max = 1
+
+
+  var LineChartDemo = new Chart(mychart).Line(barData, {
+    scaleOverride: true,
+    scaleSteps: steps,
+    scaleStepWidth: Math.ceil(max / steps),
+    scaleStartValue: 0,
+    scaleShowVerticalLines: true,
+    scaleShowGridLines : true,
+    barShowStroke : true,
+    scaleShowLabels: true,
+    bezierCurve: false,
+  });
+</script>
+    <h2> DRUGS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  WEAPONS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ALCOHOL </h2>
+	<h1></h1>
+	<h4><button onclick="window.location.href=&quot;/&quot;">Go Back To Home Page</button>
+	<button onclick="window.history.back();">Go Back To Dashboard</button></h4>
+  </center>
+    <footer>
+        <small>Copyright © 2019 Srihari Nanniyur and Aadit Trivedi. All rights reserved.</small>
+    </footer>
+</body>
+</html>

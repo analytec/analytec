@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/css?family=Ramabhadra&display=swap" rel="stylesheet">
+	<script type="text/javascript" src="{{url_for('static', filename='js/drift.js')}}"></script>
+    <meta charset="UTF-8">
+    <title>Help | Analytec</title>
+<!-- End of Async Drift Code -->
+  </head>
+  <style>
+    html {
+        font-family: sans-serif;
+        background-image: url(/static/background.jpg);
+        background-size: cover;
+    }
+    h2 {
+        color: white;
+        font-size: 30px;
+        background-color: teal;
+        opacity: 0.8;
+    };
+    p {
+      color: white;
+      font: 20px sans-serif;
+
+    }
+    h3 {
+      color: white;
+    }
+	h4 {
+		color:white;
+	}
+    .image-example {
+      width: 50vw;
+      min-width: 80px;
+      text-align: center;
+      height: 400px;
+	  margin: 5% auto;
+      background-color: #ccc;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      text-align: left;
+      padding-left: 20px;
+  }
+  .row {
+  white-space: nowrap;
+}
+
+.row > div {
+  width: 785px;
+  display: inline-block;
+}
+h1 {
+  font-family: 'Ramabhadra', sans-serif;
+  color: white;
+  font-size: 80px;
+
+}
+.error {
+  color: red;
+}
+input[type=number]{
+    width: 40px;
+}
+div#loading {
+    width: 35px;
+    height: 35px;
+    display: none;
+    background: url(/static/loading.gif) no-repeat;
+    cursor: wait;
+    }
+    #myProgress {
+      width: 300px;
+      float: right;
+      background-color: #ddd;
+    }
+    #myBar {
+      width: 1%;
+      float: left;
+      height: 30px;
+      background-color: #4CAF50;
+    }
+  }
+  .center {
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+  }
+  </style>
+  <script>
+  function move() {
+    var elem = document.getElementById("myBar");
+    var width = 1;
+    var id = setInterval(frame, 10);
+    function frame() {
+      if (width >= 100) {
+        clearInterval(id);
+      } else {
+        width=width+.02;
+        elem.style.width = width + '%';
+      }
+    }
+  }
+</script>
+
+<body>
+	<center>
+		<h1> <strong>Analytec User's Guide</strong></h1>
+		<h2>
+            <form action="/" method="get">
+                <input class="w3-btn w3-blue" type="submit" value="Go Back Home">
+            </form>
+		</h2>
+	</center>
+	<div class="image-example">
+		<p><strong>What does Analytec do?</strong><br>
+			Analytec is a web application that finds the amount of dangerous content - specifically weapons, drugs, and alcohol - present in a user's social media image posts. Currently, Shieldware supports Twitter and is working on Facebook, Instagram, and YouTube integration.
+		</p>
+		<p><strong>How do I use Analytec?</strong><br>
+			It's easy! Just head to the home page, specify a Twitter username and the number of recent posts you want analyzed, and wait for Analytec to work its magic.
+			Once it's done, Analytec will provide graphs of the weapon, drug, and alcohol content present in the tweets analyzed.
+			If you want to perform bulk searches, you can simply import a CSV file containing a username on each line (make sure that every line has ONLY a valid username on it, with preferably no whitespace!), specify the number of processors on your computer (usually up to 6, depending on how fast you want your data analyzed), and you'll be able to access content graphs after Analytec analyzes your data.
+		</p>
+	</div>
+    <footer>
+        <small>Copyright © 2019 Srihari Nanniyur and Aadit Trivedi. All rights reserved.</small>
+    </footer>
+</body>
+</html>

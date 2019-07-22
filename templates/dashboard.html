@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/css?family=Ramabhadra&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <title>Dashboard | Analytec</title>
+	<script type="text/javascript" src="{{url_for('static', filename='js/drift.js')}}"></script>
+  </head>
+  <style>
+    html {
+        font-family: sans-serif;
+        background-image: url(/static/background.jpg);
+        background-size: cover;
+    }
+    h2 {
+        color: white;
+        font-size: 30px;
+        background-color: teal;
+        opacity: 0.8;
+    };
+    p {
+      color: white;
+      font: 20px sans-serif;
+
+    }
+    h3 {
+      font-size: 15px;
+      color: white;
+    }
+    .image-example {
+      width: 30vw;
+      min-width: 100px;
+      text-align: center;
+      height: {{ div_size }};
+      margin: 5% auto;
+      background-color: #ccc;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      text-align: left;
+      padding-left: 20px;
+  }
+  .row {
+  white-space: nowrap;
+}
+
+.row > div {
+  width: 220px;
+  display: inline-block;
+}
+h1 {
+  font-family: 'Ramabhadra', sans-serif;
+  color: white;
+  font-size: 100px;
+
+}
+input[type=number]{
+    width: 40px;
+}
+</style>
+
+<body>
+<center>
+	<h1><img src="/static/logo.png"></img></h1>
+	<h2><a href="/">Go Home</a></h2>
+</center>
+
+<div class="w3-container w3-half">
+  <h3>Click on a Twitter username to see the corresponding graph.</h3>
+  <ul class="w3-ul w3-red">
+        {% for username in usernames %}
+            <li><a href="/tw_graph/{{username}}/{{data[username]}}" style="display:block;">{{ username }} ⟶ Graph</a></li>
+        {% endfor %}
+  </ul>
+</div>
+<h1><br><br></h1>
+    <footer>
+        <small>Copyright © 2019 Srihari Nanniyur and Aadit Trivedi. All rights reserved.</small>
+    </footer>
+
+</body>

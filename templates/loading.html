@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/css?family=Ramabhadra&display=swap" rel="stylesheet">
+	<script type="text/javascript" src="{{url_for('static', filename='js/drift.js')}}"></script>
+    <meta charset="UTF-8">
+    <title>Loading | Analytec</title>
+</head>
+
+  <style>
+    html {
+        font-family: sans-serif;
+        background-image: url(/static/background.jpg);
+        background-size: cover;
+    }
+    h2 {
+        color: white;
+        font-size: 30px;
+        background-color: teal;
+        opacity: 0.8;
+    };
+    p {
+      color: white;
+      font: 20px sans-serif;
+
+    }
+    h3 {
+      color: white;
+	  background-color: darkslategray;
+    }
+	h4 {
+		color:white;
+	}
+    .image-example {
+      width: 50vw;
+      min-width: 80px;
+      text-align: center;
+      height: 400px;
+	  margin: 5% auto;
+      background-color: #ccc;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      text-align: left;
+      padding-left: 20px;
+  }
+  .row {
+  white-space: nowrap;
+}
+
+.row > div {
+  width: 785px;
+  display: inline-block;
+}
+h1 {
+  font-family: 'Ramabhadra', sans-serif;
+  color: white;
+  font-size: 80px;
+
+}
+.error {
+  color: red;
+}
+input[type=number]{
+    width: 40px;
+}
+div#loading {
+    width: 35px;
+    height: 35px;
+    display: none;
+    background: url(/static/loading.gif) no-repeat;
+    cursor: wait;
+    }
+    #myProgress {
+      width: 300px;
+      float: right;
+      background-color: #ddd;
+    }
+    #myBar {
+      width: 1%;
+      float: left;
+      height: 30px;
+      background-color: #4CAF50;
+    }
+  .center {
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+  }
+</style>
+
+<body>
+	<center>
+		<h1><img src="/static/logo.png"></img></h1>
+		<div class="row" style="background-color:white;">
+			<div id="progress" style="background-color:black;"></div>
+    	</div>
+		<h3>Please wait while Analytec analyzes your data...</h3>
+	</center>
+	<footer>
+        <small>Copyright © 2019 Srihari Nanniyur and Aadit Trivedi. All rights reserved.</small>
+    </footer>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/nanobar/0.2.1/nanobar.min.js"></script>
+<script>
+// create a progress bar
+var nanobar = new Nanobar({
+	bg: '#42f4f4',
+	target: document.getElementById("progress")
+});
+nanobar.go(0);
+var count = 0;
+function update_progress(status_url) {
+    console.log('in update_progress()')
+	percent = parseInt(count * ((60 / {{tweets_num}}) * {{processor_count}}) * 0.1);
+	console.log(percent);
+	if (percent < 100) {
+		nanobar.go(percent);
+	}
+	count += 1
+    // send GET request to status URL
+    $.getJSON(status_url, function(data) {
+        console.log(data['state'])
+        // update UI
+        if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {
+            if ('result' in data) {
+                console.log("Redirecting to" + data['url']);
+                $(location).attr('href', data['url']);
+            }
+            else {
+                // something unexpected happened
+                alert('Error: either too many connections to this website at once, OR you have exhausted the API key call limit. Please try again later.')
+            }
+        }
+        else {
+            // rerun in 1 second
+            setTimeout(function() {
+                update_progress(status_url);
+            }, 1000);
+        }
+    });
+}
+console.log("Script running.");
+console.log("{{status_url}}");
+update_progress("{{status_url}}");
+</script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link href="https://fonts.googleapis.com/css?family=Ramabhadra&display=swap" rel="stylesheet">
+	<meta charset="UTF-8">
+	<title>Home | Analytec</title>
+	<script type="text/javascript" src="{{url_for('static', filename='js/drift.js')}}"></script>
+</head>
+
+<style>
+    html {
+        font-family: sans-serif;
+        background-image: url(/static/background.jpg);
+        background-size: cover;
+    }
+    h2 {
+        color: white;
+        font-size: 30px;
+        background-color: teal;
+        opacity: 0.8;
+    };
+    p {
+      color: white;
+      font: 20px sans-serif;
+    }
+    h3 {
+      color: white;
+    }
+	h4 {
+		color:white;
+	}
+    .image-example {
+      width: 30vw;
+      min-width: 80px;
+      text-align: center;
+      height: 380px;
+	  margin: 5% auto;
+      background-color: #ccc;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      text-align: left;
+      padding-left: 20px;
+  }
+  .row {
+  white-space: nowrap;
+}
+.row > div {
+  width: 785px;
+  display: inline-block;
+}
+h1 {
+  font-family: 'Ramabhadra', sans-serif;
+  color: white;
+  font-size: 80px;
+}
+.error {
+  color: red;
+}
+input[type=number]{
+    width: 40px;
+}
+div#loading {
+    width: 35px;
+    height: 35px;
+    display: none;
+    background: url(/static/loading.gif) no-repeat;
+    cursor: wait;
+    }
+    #myProgress {
+      width: 300px;
+      float: right;
+      background-color: #ddd;
+    }
+    #myBar {
+      width: 1%;
+      float: left;
+      height: 30px;
+      background-color: #4CAF50;
+    }
+  .center {
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+  }
+</style>
+
+<body>
+	<center>
+		<h1><img src="/static/logo.png"></img></h1>
+		<h2>
+			<form action="/help" method="get">
+				<input class="w3-btn w3-blue" type="submit" value="How to Use"><br>
+			</form>
+		</h2>
+	</center>
+	<div class="row"></div>
+	<div class= "w3-container w3-half w3-indigo w3-border w3-border-cyan" style="float:left">
+    	<form action="/loading_single" method=post style="float:left;">
+			<br>
+			<p><strong>Single Query... </strong></p>
+    		<p><strong>Twitter Username:</strong> <input id="username-tw" name="username-tw"></p>
+			<p><strong>Number of Tweets to Analyze: </strong> <input id="tweets-num-single" name="tweets-num-single" value="10" type="number" min="2" style="width:80px;"></p>
+			<p><strong>Number of Processors </strong>
+			<input id="processor-count-single" name="processor-count-single" type=number value="2" min="2" max="6" style="width:80px;"></p>
+        	<p><input class="w3-btn w3-blue" id="submit-single" name="submit-single" type="submit" value="Search" ></p>
+			<br>
+    	</form>
+    	{% if error %}
+        	<p class="error"><strong>Error:</strong> {{ error }}</p>
+      	{% endif %}
+	</div>
+	<div class="w3-container w3-half w3-indigo w3-border w3-border-cyan">
+		<br>
+      	<form action="/loading_bulk" method=post enctype=multipart/form-data>
+			<p><strong> Import Spreadsheet... </strong></p>
+        	<p><div class="row">
+        		<div><input type=file name=file></div>
+      		</div></p>
+			<p><strong>Number of Tweets to Analyze Per User: </strong> <input id="tweets-num-bulk" name="tweets-num-bulk" value="10" min="2" type="number" style="width:80px;"></p>
+      		<p><strong>Number of Processors: </strong>
+			<input id="processor-count-bulk" name="processor-count-bulk" type=number value="2" min="2" max="6" style="width:80px;"></p>
+      		{% if errorcsv %}
+          		<p class="error"><strong>Error:</strong> {{ errorcsv }}</p>
+        	{% endif %}
+      		<div><input class="w3-btn w3-blue" type="submit" id="submit-bulk" name="submit-bulk" value="Bulk Query"></div>
+			<br><br>
+      	</form>
+	</div>
+	<h1><br><br><br></h1>
+	<footer>
+		<small>Copyright © 2019 Srihari Nanniyur and Aadit Trivedi. All rights reserved.</small>
+	</footer>
+</body>
+</html>
