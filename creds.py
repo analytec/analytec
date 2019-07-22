@@ -14,21 +14,9 @@ all_creds = [
     ["14292842", "xQaZniLs3WMsBUWiQAfC"], # technologiestiger@gmail.com
     ["411695319", "4WwecUhAmadQFnqMwAmd"], # industriesgarage@gmail.com
     ["1136521489", "P4wfmrYqQfTdYvG8EwHq"] # analytecofficial@gmail.com
+    ["1034788602", "beDYiVcGqfhurp6na3fs"] # 3.analytecofficial@gmail.com [SurveyMonkey HR]
 ]
 current_cred = 0
-
-
-# SET #1
-client_access = "67608154"
-client_key = "756T67AahQBhkwg53TVy"
-
-# SET #2
-#client_access = "630881392"
-#client_key = "St5TPUomwvLYq7eiXd4G"
-
-# SET #3
-#client_access = "411695319"
-#client_key = "4WwecUhAmadQFnqMwAmd"
 
 auth_token_prelim = 'analytec'
 auth_token_penult = 'admin'
