@@ -11,7 +11,7 @@ requests-toolbelt==0.7.0
 responses==0.10.4
 sightengine==1.4.0
 webencodings==0.5.1
-Werkzeug==0.14.1
+Werkzeug==0.15.3
 widgetsnbextension==3.4.2
 celery==4.3.0
 redis==3.2.0
